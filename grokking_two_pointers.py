@@ -1,6 +1,8 @@
 # GROKKING - TWO POINTER PROBLEMS
 
 # PAIR WITH TARGET SUM (TWO POINTER ALGORITHM)
+# Given an array of sorted numbers and a target sum, find a pair in the array whose
+# sum is equal to the given target
 
 def pair_with_target_sum(arr, target_sum):
     left = 0
@@ -32,6 +34,8 @@ main()
 ###########################################################################################
 
 # REMOVE DUPLICATES
+# Given an array of sorted numbers, remove all duplicate number instances from it in-place,
+# such that each element appears only once
 
 def remove_duplicates(arr):
     # index of the next non-duplicate element
@@ -60,7 +64,8 @@ main()
 ############################################################################################
 
 # SQUARING A SORTED ARRAY (WITH NEGATIVE VALUE INPUTS)
-# Create new sorted array containing all square of numbers in input sorted array
+# Given a sorted array, created a new array containing squares of all the numbers of the
+# input array in the sorted order
 
 def make_squares(arr):
     length = len(arr)
@@ -106,7 +111,7 @@ main()
 ############################################################################################
 
 # TRIPLET SUM TO ZERO
-# Find all unique triplets in an unsorted array that add up to zero
+# Given an array of unsorted numbers, find all unique triplets in it that add up to zero
 
 def search_triplets(arr):
     # Initiate array to store results
@@ -227,3 +232,45 @@ main()
 
 # Time Complexity - O(N^2) Approximately 
 # Space Complexity - O(N)
+
+
+############################################################################################
+
+# SUBARRAYS WITH PRODUCTS LESS THAN A TARGET
+# Given an array with positive numbers and a positive target number, find all of its
+# contiguous subarrays whose product is less than the target number
+
+from collections import deque
+
+def find_subarrays(arr, target):
+    result = []
+    product = 1
+    left = 0 
+
+    for right in range(len(arr)):
+        product *= arr[right]
+        
+        while (product >= target and left <= right):
+            product /= arr[left]
+            left += 1
+        temp_list = deque()
+        
+        for i in range(right, left-1, -1):
+            temp_list.appendleft(arr[i])
+            result.append(list(temp_list))
+    
+    return result
+
+
+def main():
+    print(find_subarrays([2, 5, 3, 10], 30))
+    print(find_subarrays([8, 2, 6, 5], 50))
+
+main()
+
+# Time Complexity - O(N^3) Approximately 
+# O(N) for loop + O(N^2) creating subarrays = O(N^3) 
+# Space Complexity - O(N)
+
+
+############################################################################################
