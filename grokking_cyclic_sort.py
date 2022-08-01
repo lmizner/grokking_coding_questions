@@ -100,6 +100,7 @@ def find_missing_numbers(nums):
     
     missing_numbers = []
 
+    # Once te list is sorted, cycle through and add all missing values to an array
     for i in range(len(nums)):
         if nums[i] != i + 1:
             missing_numbers.append(i + 1)
@@ -119,3 +120,46 @@ main()
 
 
 ################################################################################################
+
+# FIND THE DUPLICATE NUMBER
+# Given an unsorted array containing 'n+1' numbers taken from the range 1 to 'n'. The array 
+# has only one duplicate but it can be repeated multiple time. Find that duplicate number without
+# using any extra space - modify the input array.
+
+def find_duplicate(nums):
+    i = 0
+
+    while i < len(nums):
+        # If the value is not equal to its corresponding index
+        if nums[i] != i + 1:
+            j = nums[i] - 1
+
+            # If the values are different...
+            if nums[i] != nums[j]:
+                # ...Swap locations in the array...
+                nums[i], nums[j] = nums[j], nums[i]
+            # ...otherwise, we've found the duplicate
+            else:
+                return nums[i]
+        
+        # When the value is equal to the index, move to the next step in the cycle
+        else:
+            i += 1
+    
+    # If there are no duplicate values, return -1
+    return -1 
+
+
+def main():
+    print(find_duplicate([1, 4, 4, 3, 2]))
+    print(find_duplicate([2, 1, 3, 3, 5, 4]))
+    print(find_duplicate([2, 4, 1, 4, 4]))
+
+main()
+
+# Time Complexity - O(n)
+# Space Complexity - O(1)
+
+################################################################################################
+
+
