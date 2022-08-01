@@ -242,3 +242,44 @@ main()
 
 ################################################################################################
 
+# CHALLENGE 2: FIND THE SMALLEST MISSING POSITIVE NUMBER
+# Given an unsorted array containing numbers, find the smallest missing positive number in it
+
+def find_first_smallest_missing_positive(nums):
+    i = 0
+    n = len(nums)
+
+    while i < n:
+        j = nums[i] - 1
+        
+        if nums[i] > 0 and nums[i] <= n and nums[i] != nums[j]:
+            # Swap locations in the array...
+            nums[i], nums[j] = nums[j], nums[i]
+        # ...then move to the next i in the cycle
+        else:
+            i += 1
+
+    # Once the list is sorted, iterate through the array and return the first index
+    # that does not have the correct number
+    for i in range(n):
+        if nums[i] != i + 1:
+            return i + 1
+
+    # Otherwise, return the length of the array plus 1
+    return len(nums) + 1
+
+
+def main():
+    print(find_first_smallest_missing_positive([-3, 1, 5, 4, 2]))
+    print(find_first_smallest_missing_positive([3, -2, 0, 1, 2]))
+    print(find_first_smallest_missing_positive([3, 2, 5, 1]))
+
+main()    
+
+# Time Complexity - O(n)
+# Space Complexity - O(1)
+
+
+################################################################################################
+
+
