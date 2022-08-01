@@ -199,6 +199,46 @@ main()
 # Time Complexity - O(n)
 # Space Complexity - O(1)
 
+
 ################################################################################################
 
+# CHALLENGE 1: FIND THE CORRUPT PAIR
+# Given an unsorted array containing 'n' numbers taken from the range 1 to 'n'. The array
+# originally contained all the numbers from 1 to 'n', but due to a data error, one of the 
+# numbers got duplicated which also resulted in one number going missing. Find both these numbers.
+
+def find_corrupt_numbers(nums):
+    i = 0
+
+    while i < len(nums):
+        j = nums[i] - 1
+
+        # If the values are different...
+        if nums[i] != nums[j]:
+            # ...Swap locations in the array...
+            nums[i], nums[j] = nums[j], nums[i]
+        # ...until the array indices are the same, then move to the next i in the cycle
+        else:
+            i += 1
+
+    # Once te list is sorted, cycle through and return corrupt values
+    for i in range(len(nums)):
+        if nums[i] != i + 1:
+            return [nums[i], i + 1]
+
+    # If there are no corrupt values, return [-1, -1]
+    return [-1, -1]
+
+
+def main():
+    print(find_corrupt_numbers([3, 1, 2, 5, 2]))
+    print(find_corrupt_numbers([3, 1, 2, 3, 6, 4]))
+
+main()    
+
+# Time Complexity - O(n)
+# Space Complexity - O(1)
+
+
+################################################################################################
 
