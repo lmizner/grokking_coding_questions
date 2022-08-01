@@ -162,4 +162,43 @@ main()
 
 ################################################################################################
 
+# FIND ALL DUPLICATE NUMBERS 
+# Given an unsorted array containing 'n' numbers taken from the range 1 to n. The array has 
+# some numbers appearing twice, find all these duplicate numbers using constant space.
+
+def find_all_duplicates(nums):
+    i = 0
+
+    while i < len(nums):
+        j = nums[i] - 1
+
+        # If the values are different...
+        if nums[i] != nums[j]:
+            # ...Swap locations in the array...
+            nums[i], nums[j] = nums[j], nums[i]
+        # ...until the array indices are the same, then move to the next i in the cycle
+        else:
+            i += 1
+
+    duplicate_numbers = []
+
+    # Once te list is sorted, cycle through and add all duplicate values to an array
+    for i in range(len(nums)):
+        if nums[i] != i + 1:
+            duplicate_numbers.append(nums[i])
+
+    return duplicate_numbers
+
+
+def main():
+    print(find_all_duplicates([3, 4, 4, 5, 5]))
+    print(find_all_duplicates([5, 4, 7, 2, 3, 5, 3]))
+
+main()
+
+# Time Complexity - O(n)
+# Space Complexity - O(1)
+
+################################################################################################
+
 
